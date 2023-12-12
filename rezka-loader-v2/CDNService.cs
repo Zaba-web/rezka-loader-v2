@@ -93,9 +93,20 @@ namespace rezka_loader_v2
 
             if (availableTranslators.Count == 0)
             {
-                // todo: extract translation id from js on page
-                MessageBox.Show("The program currently does not support movies that has only one translation.", "Error");
-                return null;
+                var scriptNodes = html.DocumentNode.SelectNodes("//script");
+                
+                foreach(var node in scriptNodes)
+                {
+                    if (node.InnerHtml.Contains("initCDNMoviesEvents"))
+                    {
+                        var scriptItems = node.InnerHtml.Split(',');
+                        if (scriptItems.Length > 0 && int.TryParse(scriptItems[1], out _))
+                        {
+                            availableTranslators.Add(new Translator("Default", int.Parse(scriptItems[1])));
+                            break;
+                        }
+                    }
+                }
             }
 
             return new MoviePageData(availableTranslators, availableSeasons, availableEpisodes, movieId);

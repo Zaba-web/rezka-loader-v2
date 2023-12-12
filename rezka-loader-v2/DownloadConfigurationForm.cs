@@ -133,8 +133,14 @@ namespace rezka_loader_v2
 
             if (oSaveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                fileName = oSaveFileDialog.FileName;
-                new RezkaClient().DownloadFile(link, fileName);
+                try
+                {
+                    fileName = oSaveFileDialog.FileName;
+                    new RezkaClient().DownloadFile(link, fileName);
+                } catch (Exception ex)
+                {
+                    MessageBox.Show("Unknown error occured. Please try again.", "Error");
+                }
                 this.Close();
             }
         }
