@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using AltoHttp;
+using System.IO;
+using System.Windows.Forms;
+using System.Threading;
+using System.Net;
+using System.Linq;
 
 namespace rezka_loader_v2
 {
@@ -82,12 +87,41 @@ namespace rezka_loader_v2
         }
         public void DownloadFile(String url, String filepath)
         {
-            HttpDownloader downloader = new HttpDownloader(url, filepath);
-            downloader.Start();
+            if (DownloadStatus.DownloadClient == DownloadStatus.ALTO)
+            {
+                HttpDownloader downloader = new HttpDownloader(url, filepath);
+                downloader.Start();
 
-            DownloadStatus.Get().AddFile(filepath, "0%");
+                DownloadStatus.Get().AddFile(filepath, "0%");
 
-            downloader.ProgressChanged += Downloader_ProgressChanged;
+                downloader.ProgressChanged += Downloader_ProgressChanged;
+            } else
+            {
+                var client = new WebClient();
+                client.DownloadFileCompleted += Client_DownloadFileCompleted;
+                client.QueryString.Add("file", filepath);
+                client.DownloadFileAsync(new Uri(url), filepath);
+
+                DownloadStatus.Get().AddFile(filepath, "In progress...");
+            }
+        }
+
+        private void Client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            var statusFiles = DownloadStatus.Get().GetFiles();
+            string filename = ((System.Net.WebClient)(sender)).QueryString["file"];
+
+            filename = filename.Split('\\').Last();
+
+            if (e.Error != null)
+            {
+                statusFiles[filename][1] = "Error";
+                MessageBox.Show("Error occured while downloading " + filename);
+            } else
+            {
+                statusFiles[filename][1] = "Done";
+                MessageBox.Show("Download completed: " + filename);
+            }
         }
 
         private void Downloader_ProgressChanged(object sender, ProgressChangedEventArgs e)

@@ -41,6 +41,9 @@
             this.minimize = new System.Windows.Forms.Button();
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.downloadClient = new System.Windows.Forms.RadioButton();
+            this.downloadClientAlto = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,12 +166,51 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(408, 513);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(119, 14);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Download Client:";
+            // 
+            // downloadClient
+            // 
+            this.downloadClient.AutoSize = true;
+            this.downloadClient.Checked = true;
+            this.downloadClient.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.downloadClient.Location = new System.Drawing.Point(533, 512);
+            this.downloadClient.Name = "downloadClient";
+            this.downloadClient.Size = new System.Drawing.Size(67, 18);
+            this.downloadClient.TabIndex = 9;
+            this.downloadClient.TabStop = true;
+            this.downloadClient.Text = "Native";
+            this.downloadClient.UseVisualStyleBackColor = true;
+            this.downloadClient.CheckedChanged += new System.EventHandler(this.downloadClient_CheckedChanged);
+            // 
+            // downloadClientAlto
+            // 
+            this.downloadClientAlto.AutoSize = true;
+            this.downloadClientAlto.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.downloadClientAlto.Location = new System.Drawing.Point(606, 512);
+            this.downloadClientAlto.Name = "downloadClientAlto";
+            this.downloadClientAlto.Size = new System.Drawing.Size(144, 18);
+            this.downloadClientAlto.TabIndex = 10;
+            this.downloadClientAlto.Text = "Alto [Not stable]";
+            this.downloadClientAlto.UseVisualStyleBackColor = true;
+            this.downloadClientAlto.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.ClientSize = new System.Drawing.Size(783, 574);
+            this.Controls.Add(this.downloadClientAlto);
+            this.Controls.Add(this.downloadClient);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.minimize);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.downloadsList);
@@ -202,6 +244,9 @@
         private System.Windows.Forms.ColumnHeader status;
         private System.Windows.Forms.Timer updateTimer;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.RadioButton downloadClient;
+        private System.Windows.Forms.RadioButton downloadClientAlto;
     }
 }
 

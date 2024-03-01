@@ -36,8 +36,8 @@
     <ApplicationIcon>360_F_502464267_VlxSlxp5trEnRurdfYP5y0QW9JCCiTQ7.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AltoHttp, Version=1.0.7945.3063, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AltoHttp.1.5.2\lib\net45\AltoHttp.dll</HintPath>
+    <Reference Include="AltoHttp, Version=1.0.7671.39700, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AltoHttp.1.5.0\lib\net45\AltoHttp.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.54.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.54\lib\Net45\HtmlAgilityPack.dll</HintPath>

@@ -8,6 +8,12 @@ namespace rezka_loader_v2
 {
     internal class DownloadStatus
     {
+        public const int NATIVE = 1;
+
+        public const int ALTO = 2;
+
+        public static int DownloadClient = 1;
+
         private Dictionary<String, List<String>> fileList = new Dictionary<String, List<String>>();
 
         private static DownloadStatus self;

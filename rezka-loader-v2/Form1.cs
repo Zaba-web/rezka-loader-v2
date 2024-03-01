@@ -76,5 +76,21 @@ namespace rezka_loader_v2
         {
             UpdateDownloadsList();
         }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (downloadClientAlto.Checked)
+            {
+                DownloadStatus.DownloadClient = DownloadStatus.ALTO;
+            }
+        }
+
+        private void downloadClient_CheckedChanged(object sender, EventArgs e)
+        {
+            if (downloadClient.Checked)
+            {
+                DownloadStatus.DownloadClient = DownloadStatus.NATIVE;
+            }
+        }
     }
 }
