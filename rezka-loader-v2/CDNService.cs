@@ -147,17 +147,16 @@ namespace rezka_loader_v2
                     }
                     else
                     {
-                        String[] separator = { "or" };
+                        String[] separator = { " or " };
                         var options = item.Split(separator, StringSplitOptions.RemoveEmptyEntries);
 
-                        if (options.Length > 1)
+                        foreach (String option in options)
                         {
-                            values.Add(options[1]);
-                        }
-                        else
-                        {
-                            MessageBox.Show("At the current moment this file can't be downloaded because of unsupported format.", "Error");
-                            return null;
+                            if (option.EndsWith("mp4"))
+                            {
+                               values.Add(option);
+                               break;
+                            }
                         }
                     }
                 }
