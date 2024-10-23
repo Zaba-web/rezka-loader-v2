@@ -39,6 +39,8 @@ namespace rezka_loader_v2
 
             DownloadStatus.Get().InitFromHistory();
             UpdateDownloadsList();
+
+            CheckConnection();
         }
         protected override void WndProc(ref Message m)
         {
@@ -153,6 +155,31 @@ namespace rezka_loader_v2
             } catch {
                 MessageBox.Show("Error", "Error occured while clearing history.");
             }
+        }
+
+        private void CheckConnection()
+        {
+            try
+            {
+                if (IPService.IsAvailable())
+                {
+                    conVPN.Visible = true;
+                    conBlocked.Visible = false;
+                }
+                else
+                {
+                    conBlocked.Visible = true;
+                    conVPN.Visible = false;
+                }
+            } catch
+            {
+                return;
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            CheckConnection();
         }
     }
 }

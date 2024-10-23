@@ -16,6 +16,7 @@ namespace rezka_loader_v2
         private HttpClient client;
         private const string REZKA_SEARCH_URL = "https://rezka.ag/search/?do=search&subaction=search&q=";
         private const string REZKA_GET_CDN_URL = "https://rezka.ag/ajax/get_cdn_series/";
+        private const string HOMEPAGE_URL = "https://rezka.ag";
 
         public RezkaClient()
         {

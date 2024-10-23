@@ -106,6 +106,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IPService.cs" />
     <Compile Include="MovieLink.cs" />
     <Compile Include="MoviePageData.cs" />
     <Compile Include="MovieSearch.cs" />
