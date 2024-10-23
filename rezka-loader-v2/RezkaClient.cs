@@ -87,23 +87,12 @@ namespace rezka_loader_v2
         }
         public void DownloadFile(String url, String filepath)
         {
-            if (DownloadStatus.DownloadClient == DownloadStatus.ALTO)
-            {
-                HttpDownloader downloader = new HttpDownloader(url, filepath);
-                downloader.Start();
+            var client = new WebClient();
+            client.DownloadFileCompleted += Client_DownloadFileCompleted;
+            client.QueryString.Add("file", filepath);
+            client.DownloadFileAsync(new Uri(url), filepath);
 
-                DownloadStatus.Get().AddFile(filepath, "0%");
-
-                downloader.ProgressChanged += Downloader_ProgressChanged;
-            } else
-            {
-                var client = new WebClient();
-                client.DownloadFileCompleted += Client_DownloadFileCompleted;
-                client.QueryString.Add("file", filepath);
-                client.DownloadFileAsync(new Uri(url), filepath);
-
-                DownloadStatus.Get().AddFile(filepath, "In progress...");
-            }
+            DownloadStatus.Get().AddFile(filepath, "In progress...");
         }
 
         private void Client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)

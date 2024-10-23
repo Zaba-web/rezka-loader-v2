@@ -43,6 +43,7 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.downloadClient = new System.Windows.Forms.RadioButton();
             this.downloadClientAlto = new System.Windows.Forms.RadioButton();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,7 +96,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(503, 460);
+            this.button1.Location = new System.Drawing.Point(411, 460);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(141, 33);
             this.button1.TabIndex = 4;
@@ -119,6 +120,7 @@
             this.downloadsList.UseCompatibleStateImageBehavior = false;
             this.downloadsList.View = System.Windows.Forms.View.Details;
             this.downloadsList.SelectedIndexChanged += new System.EventHandler(this.downloadsList_SelectedIndexChanged);
+            this.downloadsList.DoubleClick += new System.EventHandler(this.downloadsList_DoubleClick);
             // 
             // file
             // 
@@ -195,12 +197,30 @@
             this.downloadClientAlto.Visible = false;
             this.downloadClientAlto.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button2.Location = new System.Drawing.Point(610, 460);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(141, 33);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "CLEAR HISTORY";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.ClientSize = new System.Drawing.Size(783, 574);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.downloadClientAlto);
             this.Controls.Add(this.downloadClient);
             this.Controls.Add(this.minimize);
@@ -238,6 +258,7 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.RadioButton downloadClient;
         private System.Windows.Forms.RadioButton downloadClientAlto;
+        private System.Windows.Forms.Button button2;
     }
 }
 

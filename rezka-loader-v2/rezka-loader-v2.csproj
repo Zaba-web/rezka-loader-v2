@@ -97,6 +97,7 @@
     <Compile Include="DownloadConfigurationForm.Designer.cs">
       <DependentUpon>DownloadConfigurationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DownloadHistory.cs" />
     <Compile Include="DownloadStatus.cs" />
     <Compile Include="Episode.cs" />
     <Compile Include="Form1.cs">
