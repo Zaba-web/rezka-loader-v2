@@ -45,5 +45,22 @@ namespace rezka_loader_v2
 
             return foundMovies;
         }
+
+        public string getNameFromUrl(String url)
+        {
+            String page = rezkaClient.GetMoviePage(url);
+
+            HtmlDocument html = new HtmlDocument();
+            html.LoadHtml(page);
+
+            HtmlNodeCollection title = html.DocumentNode.SelectNodes("//div[contains(@class, 'b-post__title')]");
+
+            if (title.Count > 0)
+            {
+                return title[0].InnerText;
+            }
+
+            return "";
+        }
     }
 }

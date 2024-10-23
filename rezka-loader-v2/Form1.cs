@@ -26,6 +26,15 @@ namespace rezka_loader_v2
         private void Main_Load(object sender, EventArgs e)
         {
             pictureBox1.Image = pictureBox1.InitialImage;
+            label2.Text = Versioning.CURRENT_VESION;
+
+            var ver = Versioning.CheckUpdate();
+            if (ver != null)
+            {
+                var updateAvailableForm = new UpdateAvailable();
+                updateAvailableForm.versionData = ver;
+                updateAvailableForm.Show(this);
+            }
         }
         protected override void WndProc(ref Message m)
         {
@@ -91,6 +100,16 @@ namespace rezka_loader_v2
             {
                 DownloadStatus.DownloadClient = DownloadStatus.NATIVE;
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void downloadsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

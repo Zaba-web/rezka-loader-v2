@@ -3,6 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -125,18 +126,32 @@ namespace rezka_loader_v2
         private void downloadBtn_Click(object sender, EventArgs e)
         {
             String link = qualityList.SelectedValue.ToString();
-            string fileName = "";
+            string fileName = translationSelector.Text + "_" + seasonSelector.Text + "_" + episodeSelector.Text;
+
+            MovieSearch search = new MovieSearch();
+            String filmName = search.getNameFromUrl(url);
+
+            fileName = fileName.Replace(" ", "_");
+
+            String extension = link.Split('.').Last();
+            if (filmName != "")
+            {
+                fileName = filmName + "_" + fileName;
+            }
+
+            fileName = fileName + "." + extension;
+
+            fileName = string.Concat(fileName.Split(Path.GetInvalidFileNameChars()));
 
             SaveFileDialog oSaveFileDialog = new SaveFileDialog();
             oSaveFileDialog.Filter = "All files (*.*) | *.*";
-            oSaveFileDialog.FileName = link.Split('/').Last();
+            oSaveFileDialog.FileName = fileName.Trim();
 
             if (oSaveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    fileName = oSaveFileDialog.FileName;
-                    new RezkaClient().DownloadFile(link, fileName);
+                    new RezkaClient().DownloadFile(link, oSaveFileDialog.FileName);
                 } catch (Exception ex)
                 {
                     MessageBox.Show("Unknown error occured. Please try again.", "Error");
