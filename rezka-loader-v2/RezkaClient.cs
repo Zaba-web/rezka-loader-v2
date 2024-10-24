@@ -16,6 +16,7 @@ namespace rezka_loader_v2
         private HttpClient client;
         private const string REZKA_SEARCH_URL = "https://rezka.ag/search/?do=search&subaction=search&q=";
         private const string REZKA_GET_CDN_URL = "https://rezka.ag/ajax/get_cdn_series/";
+        private const string HOMEPAGE_URL = "https://rezka.ag";
 
         public RezkaClient()
         {
@@ -87,23 +88,12 @@ namespace rezka_loader_v2
         }
         public void DownloadFile(String url, String filepath)
         {
-            if (DownloadStatus.DownloadClient == DownloadStatus.ALTO)
-            {
-                HttpDownloader downloader = new HttpDownloader(url, filepath);
-                downloader.Start();
+            var client = new WebClient();
+            client.DownloadFileCompleted += Client_DownloadFileCompleted;
+            client.QueryString.Add("file", filepath);
+            client.DownloadFileAsync(new Uri(url), filepath);
 
-                DownloadStatus.Get().AddFile(filepath, "0%");
-
-                downloader.ProgressChanged += Downloader_ProgressChanged;
-            } else
-            {
-                var client = new WebClient();
-                client.DownloadFileCompleted += Client_DownloadFileCompleted;
-                client.QueryString.Add("file", filepath);
-                client.DownloadFileAsync(new Uri(url), filepath);
-
-                DownloadStatus.Get().AddFile(filepath, "In progress...");
-            }
+            DownloadStatus.Get().AddFile(filepath, "In progress...");
         }
 
         private void Client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)

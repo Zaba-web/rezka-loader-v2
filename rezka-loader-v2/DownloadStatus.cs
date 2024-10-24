@@ -22,6 +22,16 @@ namespace rezka_loader_v2
 
         }
 
+        public void InitFromHistory()
+        {
+            Dictionary<String, List<String>> history = DownloadHistory.Read();
+
+            if (history != null)
+            {
+                fileList = history;
+            }
+        }
+
         public static DownloadStatus Get()
         {
             if (self == null)
@@ -36,6 +46,7 @@ namespace rezka_loader_v2
         {
             var name = GetName(fullPath);
             fileList.Add(name, new List<string> { fullPath, status });
+            DownloadHistory.Save(fileList);
         }
 
         public Dictionary<String, List<String>> GetFiles()
@@ -50,7 +61,13 @@ namespace rezka_loader_v2
 
         private String GetName(String fullPath)
         {
-            return fullPath.Split('\\').Last(); ;
+            return fullPath.Split('\\').Last();
+        }
+
+        public void ClearHistory()
+        {
+            fileList = new Dictionary<String, List<String>>();
+            DownloadHistory.Save(fileList);
         }
     }
 }

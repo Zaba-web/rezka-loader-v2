@@ -97,6 +97,7 @@
     <Compile Include="DownloadConfigurationForm.Designer.cs">
       <DependentUpon>DownloadConfigurationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DownloadHistory.cs" />
     <Compile Include="DownloadStatus.cs" />
     <Compile Include="Episode.cs" />
     <Compile Include="Form1.cs">
@@ -105,6 +106,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IPService.cs" />
     <Compile Include="MovieLink.cs" />
     <Compile Include="MoviePageData.cs" />
     <Compile Include="MovieSearch.cs" />
@@ -119,6 +121,14 @@
     </Compile>
     <Compile Include="Season.cs" />
     <Compile Include="Translator.cs" />
+    <Compile Include="UpdateAvailable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateAvailable.Designer.cs">
+      <DependentUpon>UpdateAvailable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VersionData.cs" />
+    <Compile Include="Versioning.cs" />
     <EmbeddedResource Include="DownloadConfigurationForm.resx">
       <DependentUpon>DownloadConfigurationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -136,6 +146,9 @@
     </Compile>
     <EmbeddedResource Include="Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateAvailable.resx">
+      <DependentUpon>UpdateAvailable.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

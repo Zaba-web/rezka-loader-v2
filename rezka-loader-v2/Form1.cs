@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,20 @@ namespace rezka_loader_v2
         private void Main_Load(object sender, EventArgs e)
         {
             pictureBox1.Image = pictureBox1.InitialImage;
+            label2.Text = Versioning.CURRENT_VESION;
+
+            var ver = Versioning.CheckUpdate();
+            if (ver != null)
+            {
+                var updateAvailableForm = new UpdateAvailable();
+                updateAvailableForm.versionData = ver;
+                updateAvailableForm.Show(this);
+            }
+
+            DownloadStatus.Get().InitFromHistory();
+            UpdateDownloadsList();
+
+            CheckConnection();
         }
         protected override void WndProc(ref Message m)
         {
@@ -91,6 +106,80 @@ namespace rezka_loader_v2
             {
                 DownloadStatus.DownloadClient = DownloadStatus.NATIVE;
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void downloadsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void downloadsList_DoubleClick(object sender, EventArgs e)
+        {
+            var selectedItems = downloadsList.SelectedItems;
+
+            if (selectedItems.Count == 0)
+            {
+                return;
+            }
+
+            var subitems = selectedItems[0].SubItems;
+
+            if (subitems.Count == 0)
+            {
+                return;
+            }
+
+            String filename = subitems[0].Text;
+            foreach (var file in DownloadStatus.Get().GetFiles()) {
+                if (file.Key == filename)
+                {
+                    String[] parts = file.Value[0].Split('\\').Reverse().Skip(1).Reverse().ToArray();
+                    String path = String.Join("\\", parts);
+
+                    Process.Start(path);
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DownloadStatus.Get().ClearHistory();
+                UpdateDownloadsList();
+            } catch {
+                MessageBox.Show("Error", "Error occured while clearing history.");
+            }
+        }
+
+        private void CheckConnection()
+        {
+            try
+            {
+                if (IPService.IsAvailable())
+                {
+                    conVPN.Visible = true;
+                    conBlocked.Visible = false;
+                }
+                else
+                {
+                    conBlocked.Visible = true;
+                    conVPN.Visible = false;
+                }
+            } catch
+            {
+                return;
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            CheckConnection();
         }
     }
 }
