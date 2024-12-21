@@ -106,7 +106,7 @@ namespace rezka_loader_v2
             if (e.Error != null)
             {
                 statusFiles[filename][1] = "Error";
-                MessageBox.Show("Error occured while downloading " + filename);
+                MessageBox.Show("Error occured while downloading " + filename + ". Error was: " + e.Error.ToString());
             } else
             {
                 statusFiles[filename][1] = "Done";

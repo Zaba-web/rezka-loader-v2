@@ -255,7 +255,7 @@
             // connectionCheck
             // 
             this.connectionCheck.Enabled = true;
-            this.connectionCheck.Interval = 10000;
+            this.connectionCheck.Interval = 3000;
             this.connectionCheck.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Main
