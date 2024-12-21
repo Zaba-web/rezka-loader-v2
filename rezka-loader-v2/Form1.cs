@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +17,7 @@ namespace rezka_loader_v2
         private const int WM_NCHITTEST = 0x84;
         private const int HT_CLIENT = 0x1;
         private const int HT_CAPTION = 0x2;
+        private bool connectionAutoCheck = true;
 
         public Main()
         {
@@ -163,13 +165,11 @@ namespace rezka_loader_v2
             {
                 if (IPService.IsAvailable())
                 {
-                    conVPN.Visible = true;
-                    conBlocked.Visible = false;
+                    ShowBlocked();
                 }
                 else
                 {
-                    conBlocked.Visible = true;
-                    conVPN.Visible = false;
+                    ShowVisible();
                 }
             } catch
             {
@@ -177,9 +177,55 @@ namespace rezka_loader_v2
             }
         }
 
+        private void ShowBlocked()
+        {
+            conBlocked.Visible = true;
+            conVPN.Visible = false;
+        }
+
+        private void ShowVisible()
+        {
+            conVPN.Visible = true;
+            conBlocked.Visible = false;
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-            CheckConnection();
+            if (!connectionAutoCheck)
+            {
+                return;
+            }
+
+            Thread backgroundThread = new Thread(() =>
+            {
+                try
+                {
+                    if (IPService.IsAvailable())
+                    {
+                        Invoke((MethodInvoker)delegate
+                        {
+                            ShowVisible();
+                        });
+                    } else
+                    {
+                        Invoke((MethodInvoker)delegate
+                        {
+                            ShowBlocked();
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Invoke((MethodInvoker)delegate
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                        connectionAutoCheck = false;
+                    });
+                }
+            });
+
+            backgroundThread.IsBackground = true;
+            backgroundThread.Start();
         }
     }
 }

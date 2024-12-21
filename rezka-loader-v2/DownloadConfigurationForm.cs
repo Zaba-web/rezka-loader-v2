@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -109,6 +110,10 @@ namespace rezka_loader_v2
                 nextBtn.Visible = false;
                 downloadBtn.Visible = true;
                 qualityLabel.Visible = true;
+                bulkTitle.Visible = true;
+                demoTitle.Visible = true;
+                bulk.Visible = true;
+                bulkGuide.Visible = true;
 
                 qualityList.DataSource = new BindingSource(links, null);
                 qualityList.DisplayMember = "Key";
@@ -125,8 +130,18 @@ namespace rezka_loader_v2
 
         private void downloadBtn_Click(object sender, EventArgs e)
         {
+            if (bulk.Text != "")
+            {
+                handleBulk();
+                return;
+            }
             String link = qualityList.SelectedValue.ToString();
-            string fileName = translationSelector.Text + "_" + seasonSelector.Text + "_" + episodeSelector.Text;
+            startDownload(link, getFilename(link, translationSelector.Text, seasonSelector.Text, episodeSelector.Text));
+        }
+
+        private String getFilename(String link, String translator, String season, String episode)
+        {
+            string fileName = translator + "_" + season + "_" + episode;
 
             MovieSearch search = new MovieSearch();
             String filmName = search.getNameFromUrl(url);
@@ -143,6 +158,11 @@ namespace rezka_loader_v2
 
             fileName = string.Concat(fileName.Split(Path.GetInvalidFileNameChars()));
 
+            return fileName;
+        }
+
+        private void startDownload(String link, String fileName)
+        {
             SaveFileDialog oSaveFileDialog = new SaveFileDialog();
             oSaveFileDialog.Filter = "All files (*.*) | *.*";
             oSaveFileDialog.FileName = fileName.Trim();
@@ -152,12 +172,51 @@ namespace rezka_loader_v2
                 try
                 {
                     new RezkaClient().DownloadFile(link, oSaveFileDialog.FileName);
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Unknown error occured. Please try again.", "Error");
+                    MessageBox.Show("Error occured: " + ex.Message, "Error");
                 }
                 this.Close();
             }
+        }
+
+        private void handleBulk()
+        {
+            String translator = translationSelector.Text;
+            String season = seasonSelector.Text;
+            int translatorId = GetId(this.translationSelector.Items[translationSelector.SelectedIndex].ToString());
+            int seasonId = GetId(this.seasonSelector.Items[seasonSelector.SelectedIndex].ToString());
+            string[] episodeRangeText = bulk.Text.Split('-');
+            int[] episodeRange = new int[2];
+            Int32.TryParse(episodeRangeText[0], out episodeRange[0]);
+            Int32.TryParse(episodeRangeText[1], out episodeRange[1]);
+
+            List<int> episodeIds = new List<int>();
+
+            for(int i = episodeRange[0] - 1; i <= episodeRange[1] - 1; i++)
+            {
+                episodeIds.Add(GetId(this.episodeSelector.Items[i].ToString()));
+            }
+
+            String quality = qualityList.Text;
+
+            foreach (int episodeId in episodeIds)
+            {
+                Dictionary<string, string> links = cdnService.GetCDNLinks(this.movieId, translatorId, seasonId, episodeId);
+                if(!links.ContainsKey(quality))
+                {
+                    MessageBox.Show("Quality " + qualityList.Text + " is not avaialble for the episode " + (episodeId + 1) + ". Skipping.", "Quality is not available.");
+                    continue;
+                }
+                String link = links[quality];
+                startDownload(link, getFilename(link, translator, season, episodeId.ToString()));
+            }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -42,6 +42,10 @@
             this.qualityList = new System.Windows.Forms.ComboBox();
             this.downloadBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.bulkTitle = new System.Windows.Forms.Label();
+            this.bulk = new System.Windows.Forms.TextBox();
+            this.demoTitle = new System.Windows.Forms.Label();
+            this.bulkGuide = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // searchLabel
@@ -192,17 +196,67 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panel1.Location = new System.Drawing.Point(-4, 197);
+            this.panel1.Location = new System.Drawing.Point(-4, 245);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(439, 10);
             this.panel1.TabIndex = 16;
+            // 
+            // bulkTitle
+            // 
+            this.bulkTitle.AutoSize = true;
+            this.bulkTitle.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bulkTitle.ForeColor = System.Drawing.SystemColors.Control;
+            this.bulkTitle.Location = new System.Drawing.Point(156, 129);
+            this.bulkTitle.Name = "bulkTitle";
+            this.bulkTitle.Size = new System.Drawing.Size(47, 16);
+            this.bulkTitle.TabIndex = 17;
+            this.bulkTitle.Text = "BULK:";
+            this.bulkTitle.Visible = false;
+            // 
+            // bulk
+            // 
+            this.bulk.Location = new System.Drawing.Point(160, 151);
+            this.bulk.Name = "bulk";
+            this.bulk.Size = new System.Drawing.Size(118, 20);
+            this.bulk.TabIndex = 18;
+            this.bulk.Visible = false;
+            // 
+            // demoTitle
+            // 
+            this.demoTitle.AutoSize = true;
+            this.demoTitle.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.demoTitle.ForeColor = System.Drawing.Color.IndianRed;
+            this.demoTitle.Location = new System.Drawing.Point(202, 123);
+            this.demoTitle.Name = "demoTitle";
+            this.demoTitle.Size = new System.Drawing.Size(91, 14);
+            this.demoTitle.TabIndex = 19;
+            this.demoTitle.Text = "EXPERIMENTAL";
+            this.demoTitle.Visible = false;
+            // 
+            // bulkGuide
+            // 
+            this.bulkGuide.AutoSize = true;
+            this.bulkGuide.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bulkGuide.ForeColor = System.Drawing.SystemColors.Control;
+            this.bulkGuide.Location = new System.Drawing.Point(32, 185);
+            this.bulkGuide.Name = "bulkGuide";
+            this.bulkGuide.Size = new System.Drawing.Size(383, 48);
+            this.bulkGuide.TabIndex = 20;
+            this.bulkGuide.Text = "To download multiple episodes at once, specify \r\nrange in the \"BULK\" text box. Ex" +
+    "ample: 2-5: \r\nit will download all episodes from 2 to 5.";
+            this.bulkGuide.Visible = false;
+            this.bulkGuide.Click += new System.EventHandler(this.label6_Click);
             // 
             // DownloadConfigurationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(435, 204);
+            this.ClientSize = new System.Drawing.Size(435, 256);
+            this.Controls.Add(this.bulkGuide);
+            this.Controls.Add(this.demoTitle);
+            this.Controls.Add(this.bulk);
+            this.Controls.Add(this.bulkTitle);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.downloadBtn);
             this.Controls.Add(this.qualityLabel);
@@ -242,5 +296,9 @@
         private System.Windows.Forms.ComboBox qualityList;
         private System.Windows.Forms.Button downloadBtn;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label bulkTitle;
+        private System.Windows.Forms.TextBox bulk;
+        private System.Windows.Forms.Label demoTitle;
+        private System.Windows.Forms.Label bulkGuide;
     }
 }
