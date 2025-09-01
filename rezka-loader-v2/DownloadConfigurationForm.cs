@@ -136,7 +136,15 @@ namespace rezka_loader_v2
                 return;
             }
             String link = qualityList.SelectedValue.ToString();
-            startDownload(link, getFilename(link, translationSelector.Text, seasonSelector.Text, episodeSelector.Text));
+
+            string episode = episodeSelector.Text;
+
+            if (manualSeriesInput.Text != "")
+            {
+                episode = manualSeriesInput.Text;
+            }
+
+            startDownload(link, getFilename(link, translationSelector.Text, seasonSelector.Text, episode));
         }
 
         private String getFilename(String link, String translator, String season, String episode)
@@ -217,6 +225,11 @@ namespace rezka_loader_v2
         private void label6_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            manualSeriesInput.Visible = true;
         }
     }
 }

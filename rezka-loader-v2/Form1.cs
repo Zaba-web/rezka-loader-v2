@@ -30,6 +30,7 @@ namespace rezka_loader_v2
         {
             pictureBox1.Image = pictureBox1.InitialImage;
             label2.Text = Versioning.CURRENT_VESION;
+            mirror.Text = RezkaClient.domain;
 
             var ver = Versioning.CheckUpdate();
             if (ver != null)
@@ -226,6 +227,11 @@ namespace rezka_loader_v2
 
             backgroundThread.IsBackground = true;
             backgroundThread.Start();
+        }
+
+        private void saveMirror_Click(object sender, EventArgs e)
+        {
+            RezkaClient.domain = mirror.Text;
         }
     }
 }

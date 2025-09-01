@@ -14,9 +14,10 @@ namespace rezka_loader_v2
     internal class RezkaClient
     {
         private HttpClient client;
-        private const string REZKA_SEARCH_URL = "https://rezka.ag/search/?do=search&subaction=search&q=";
-        private const string REZKA_GET_CDN_URL = "https://rezka.ag/ajax/get_cdn_series/";
-        private const string HOMEPAGE_URL = "https://rezka.ag";
+        public static String domain = "https://rezka.ag";
+        private const string REZKA_SEARCH_URL = "/search/?do=search&subaction=search&q=";
+        private const string REZKA_GET_CDN_URL = "/ajax/get_cdn_series/";
+        private static string HOMEPAGE_URL = domain;
 
         public RezkaClient()
         {
@@ -28,7 +29,7 @@ namespace rezka_loader_v2
         {
             try
             {
-                return client.GetStringAsync(REZKA_SEARCH_URL + request).Result;
+                return client.GetStringAsync(domain + REZKA_SEARCH_URL + request).Result;
             } 
             catch (Exception e)
             {
@@ -74,7 +75,7 @@ namespace rezka_loader_v2
 
             var content = new FormUrlEncodedContent(requestBody);
 
-            var response = client.PostAsync(REZKA_GET_CDN_URL, content).Result;
+            var response = client.PostAsync(domain + REZKA_GET_CDN_URL, content).Result;
             var responseString = response.Content.ReadAsStringAsync().Result;
 
             var responseParsed = JsonSerializer.Deserialize<CDNResponse>(responseString);

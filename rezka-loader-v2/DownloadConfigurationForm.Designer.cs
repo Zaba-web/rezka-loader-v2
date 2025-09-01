@@ -46,6 +46,8 @@
             this.bulk = new System.Windows.Forms.TextBox();
             this.demoTitle = new System.Windows.Forms.Label();
             this.bulkGuide = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.manualSeriesInput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // searchLabel
@@ -247,12 +249,39 @@
             this.bulkGuide.Visible = false;
             this.bulkGuide.Click += new System.EventHandler(this.label6_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button1.Location = new System.Drawing.Point(377, 69);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(28, 20);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "*";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // manualSeriesInput
+            // 
+            this.manualSeriesInput.Location = new System.Drawing.Point(286, 93);
+            this.manualSeriesInput.Name = "manualSeriesInput";
+            this.manualSeriesInput.Size = new System.Drawing.Size(118, 20);
+            this.manualSeriesInput.TabIndex = 22;
+            this.manualSeriesInput.Visible = false;
+            // 
             // DownloadConfigurationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(435, 256);
+            this.Controls.Add(this.manualSeriesInput);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.bulkGuide);
             this.Controls.Add(this.demoTitle);
             this.Controls.Add(this.bulk);
@@ -300,5 +329,7 @@
         private System.Windows.Forms.TextBox bulk;
         private System.Windows.Forms.Label demoTitle;
         private System.Windows.Forms.Label bulkGuide;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox manualSeriesInput;
     }
 }

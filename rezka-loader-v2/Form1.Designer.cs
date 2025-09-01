@@ -48,6 +48,9 @@
             this.conVPN = new System.Windows.Forms.Label();
             this.conBlocked = new System.Windows.Forms.Label();
             this.connectionCheck = new System.Windows.Forms.Timer(this.components);
+            this.mirrorLabel = new System.Windows.Forms.Label();
+            this.mirror = new System.Windows.Forms.TextBox();
+            this.saveMirror = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -258,12 +261,49 @@
             this.connectionCheck.Interval = 3000;
             this.connectionCheck.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // mirrorLabel
+            // 
+            this.mirrorLabel.AutoSize = true;
+            this.mirrorLabel.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.mirrorLabel.Location = new System.Drawing.Point(408, 555);
+            this.mirrorLabel.Name = "mirrorLabel";
+            this.mirrorLabel.Size = new System.Drawing.Size(56, 14);
+            this.mirrorLabel.TabIndex = 15;
+            this.mirrorLabel.Text = "Mirror:";
+            // 
+            // mirror
+            // 
+            this.mirror.Location = new System.Drawing.Point(470, 552);
+            this.mirror.Name = "mirror";
+            this.mirror.Size = new System.Drawing.Size(142, 20);
+            this.mirror.TabIndex = 19;
+            // 
+            // saveMirror
+            // 
+            this.saveMirror.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.saveMirror.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.saveMirror.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.saveMirror.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.saveMirror.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveMirror.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.saveMirror.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.saveMirror.Location = new System.Drawing.Point(630, 544);
+            this.saveMirror.Name = "saveMirror";
+            this.saveMirror.Size = new System.Drawing.Size(105, 33);
+            this.saveMirror.TabIndex = 20;
+            this.saveMirror.Text = "UPDATE";
+            this.saveMirror.UseVisualStyleBackColor = false;
+            this.saveMirror.Click += new System.EventHandler(this.saveMirror_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(783, 574);
+            this.ClientSize = new System.Drawing.Size(783, 626);
+            this.Controls.Add(this.saveMirror);
+            this.Controls.Add(this.mirror);
+            this.Controls.Add(this.mirrorLabel);
             this.Controls.Add(this.conBlocked);
             this.Controls.Add(this.conVPN);
             this.Controls.Add(this.label3);
@@ -310,6 +350,9 @@
         private System.Windows.Forms.Label conVPN;
         private System.Windows.Forms.Label conBlocked;
         private System.Windows.Forms.Timer connectionCheck;
+        private System.Windows.Forms.Label mirrorLabel;
+        private System.Windows.Forms.TextBox mirror;
+        private System.Windows.Forms.Button saveMirror;
     }
 }
 

@@ -1,6 +1,6 @@
 {
-    "version": "1.1b",
-    "version_sign": 2,
-    "new_in_release": "Beta release 1.1.0\n\n- Implement feature to download multiple episodes;\n- Improve error messages;\n- Fix issue with UI responsiveness;",
+    "version": "1.2b",
+    "version_sign": 3,
+    "new_in_release": "Beta release 1.2.0\n\n- Implement feature to enter episode manually",
     "update_url": "https://github.com/Zaba-web/rezka-loader-v2/releases/download/beta-1.1.0/rezka-loader-v2-1-1-b.zip"
 }
